@@ -3,10 +3,13 @@ package hello.core.member;
 public class MemberServiceImpl implements MemberService {
 
     /**
-     * MemberServiceImpl은 MemberRepository라는 인터페이스뿐만 아니라 MemoryMemberRepository라는 구현체에도 의존하고 있음
-     * 즉, DIP를 위반하고 있음
+     * 생성자 주입으로 DIP를 위반하지 않도록 함
      */
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     @Override
     public void join(Member member) {
